@@ -48,7 +48,20 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     noInfo: true,
-    overlay: true
+    overlay: true,
+    // 跨域处理
+    hot: true, // 开启热点
+    inline: true,
+    progress: true,
+    port: 8091, // 可选，修改webpack服务器的端口，默认为8080
+    host: '127.0.0.1', // 可选，修改webpack服务器的主机，默认为localhost；
+    proxy: {
+      '/api/*' : {
+        target: 'http://127.0.0.1:8888',
+        changeOrigin: true,
+        secure: false
+      }
+    }
   },
   performance: {
     hints: false

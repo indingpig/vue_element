@@ -3,7 +3,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 // 引入路由模块
 import home from './home'
-
+import user from './user'
 
 
 // 安装路由
@@ -17,6 +17,7 @@ const routes = [
         redirect: '/home',
     },
     ...home,
+    ...user,
 ];
 
 // 创建路由对象

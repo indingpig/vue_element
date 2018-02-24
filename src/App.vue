@@ -4,7 +4,7 @@
     <h1>{{msg}}</h1>
     <div>
       <router-link to="/home">点我试试</router-link>
-      <router-link to=""></router-link>
+      <router-link to="/user">user界面</router-link>
       <router-view></router-view>
     </div>
   </div>
