@@ -55,9 +55,9 @@ module.exports = {
     progress: true,
     port: 8091, // 可选，修改webpack服务器的端口，默认为8080
     host: '127.0.0.1', // 可选，修改webpack服务器的主机，默认为localhost；
-    proxy: {
-      '/api/*' : {
-        target: 'http://127.0.0.1:8888',
+    proxy: {   // 代理的相关配置
+      '/api/*' : { // 需要代理的地址： /api/*
+        target: 'http://127.0.0.1:8888', // 目标地址
         changeOrigin: true,
         secure: false
       }
