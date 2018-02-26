@@ -21,12 +21,30 @@
           // some code here...  
         },
         methods: {
-            query () {
-                let userlist = 'userlist';
-                axios.get('/api/query/users', {
-                    params: {
-                        userlist,
+            queryGet () {
+                let params = {
+                    collectionName: 'userlist',
+                    condition: {
+                        sex: 'female'
                     }
+                }
+                axios.get('/api/query/users', {
+                    params
+                })
+                .then(function (data) {
+                    console.log(data)
+                })
+                .catch(function (error) {
+                    console.log(error)
+                })
+            },
+            queryPost () {
+                let condition = {
+                    sex: 'female'
+                };
+                axios.post('/api/query/testpost',{
+                    collectionName: 'userlist',
+                    condition
                 })
                 .then(function (data) {
                     console.log(data)
@@ -37,7 +55,8 @@
             }
         },
         mounted: function () {
-            this.query()
+            // this.queryGet();
+            this.queryPost()
         }
     }
 </script>
