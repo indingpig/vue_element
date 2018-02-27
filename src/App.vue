@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div>
-      <el-container>
+      <!-- <el-container>
         <el-header>
           <h1>{{msg}}</h1>
         </el-header>
@@ -14,18 +14,28 @@
           </div>
         </el-main>
         <el-footer>底部容器</el-footer>
+      </el-container> -->
+      <el-container>
+        <el-header>
+          <Header></Header>
+        </el-header>
       </el-container>
     </div>
   </div>
 </template>
 
 <script>
+import Header from './components/header';
+
 export default {
   name: 'app',
   data () {
     return {
       msg: 'Vue Test'
     }
+  },
+  components: {
+    Header
   }
 }
 </script>
@@ -37,7 +47,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 
 h1, h2 {
