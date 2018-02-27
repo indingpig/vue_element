@@ -1,8 +1,6 @@
 <template>
   <div>
-      <h1>
-        {{headMsg}}
-      </h1>
+    首页
   </div>
 </template>
 
