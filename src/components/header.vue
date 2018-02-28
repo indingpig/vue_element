@@ -1,6 +1,8 @@
 <template>
   <div>
-      {{msg}}
+      <div class="header">
+        {{msg}}
+      </div>
   </div>
 </template>
 
@@ -10,6 +12,25 @@
             return {
                 msg:　'头部'
             }
+        },
+        methods: {
+
+        },
+        mounted: {
+
+        },
+        computed: {
+
         }
     }
 </script>
+
+<style>
+    .header {
+        width: 100%;
+        height: 50px;
+        background-color: #00AAFF;
+        text-align: center;
+        line-height: 50px;
+    }
+</style>
