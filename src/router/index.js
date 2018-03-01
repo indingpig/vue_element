@@ -2,6 +2,7 @@ import Vue from 'vue';
 // 引入vue路由
 import VueRouter from 'vue-router';
 // 引入路由模块
+import login from './login'
 import home from './home'
 import user from './user'
 
@@ -16,6 +17,7 @@ const routes = [
         path: '',
         redirect: '/home',
     },
+    ...login,
     ...home,
     ...user,
 ];

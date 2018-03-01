@@ -14,10 +14,9 @@
             }
         },
         methods: {
-
-        },
-        mounted: {
-
+            mounted: function () {
+                
+            }
         },
         computed: {
 

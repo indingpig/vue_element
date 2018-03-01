@@ -1,22 +1,6 @@
 <template>
   <div id="app">
-    <div>
-      <!-- <el-container>
-        <el-header>
-          <h1>{{msg}}</h1>
-        </el-header>
-        <el-main>
-          <img src="./assets/logo.png">
-          <div>
-            <router-link to="/home">点我试试</router-link>
-            <router-link to="/user">user界面</router-link>
-            <router-view></router-view>
-          </div>
-        </el-main>
-        <el-footer>底部容器</el-footer>
-      </el-container> -->
-      <Header></Header>
-    </div>
+      <router-view></router-view>
   </div>
 </template>
 
@@ -37,5 +21,7 @@ export default {
 </script>
 
 <style>
-
+  #app {
+    height: 100%;
+  }
 </style>
