@@ -24,7 +24,7 @@
         methods: {
             getImgData() {
                 // this.imgUrl = backImage;
-                this.imageChage = true;
+                // this.imageChage = true;
                 var self = this;
                 axios.get('/api/query/picture',{
                     params: {
@@ -34,7 +34,7 @@
                 .then(function(res) {
                     self.timer = setTimeout(function(){
                         self.imgUrl = res.data;
-                        self.imageChage = false;
+                        // self.imageChage = false;
                         clearTimeout(self.timer)
                     }, 1000)
                 })
@@ -61,14 +61,15 @@
     .login-wrap {
         width:100%;
         height: 100%;
-        transition: all .5s;
+        background-color: #333;
     }
     .login-wrap-background{
         width: 100%;
         height: 100%;
+        opacity: 0;
+        transition: opacity 0.5s;
     }
-    .image-change {
-        /* animation: showBtn 3s; */
+    /* .image-change {
         background: #333333 !important;
     }
     .image-change-after{
@@ -77,7 +78,7 @@
     .test {
         background: #ffffff;
         transition: all .5s;
-    }
+    } */
     /* @keyframes showBtn{
         10%{
             background:-webkit-radial-gradient(Circle,#1E7AA5 28%, #2287B7 30%, #2287B7 48%,#208FC1 60%); 
