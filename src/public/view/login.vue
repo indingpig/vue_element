@@ -1,13 +1,37 @@
 <template>
     <div class="login-wrap">
-        <div class="login-wrap-background" :style="{background:'url('+ imgUrl +')', opacity: opacityNum}">
+        <div class="login-wrap-background" :style="{'background-image':'url('+ imgUrl +')', opacity: opacityNum}">
         </div>
         <div class="login">
+            <div class="login-top">
+                <div>{{loaginMessage}}</div>
+            </div>
             <div>
-                <label for="userName">用户名</label>
-                <input type="text" v-model="loginData.userName" id="userName">
-                <label for="password">登录密码</label>
-                <input type="password" v-model="loginData.password" id="password">
+                <el-form :model="loginForm"
+                    :rules="loginRules"
+                    ref="loginFormRules">
+                    <el-form-item prop="userName">
+                        <el-input
+                            placeholder="请输入用户名或者邮箱"
+                            v-model="loginForm.userName"
+                            clearable>
+                        </el-input>
+                    </el-form-item>
+                    <!-- <div class="userName">
+                        
+                    </div> -->
+                    <el-form-item prop="password">
+                        <el-input
+                            placeholder="请输入密码"
+                            v-model="loginForm.password"
+                            clearable
+                            type="password">
+                        </el-input>
+                    </el-form-item>
+                    <!-- <div class="password">
+                        
+                    </div> -->
+                </el-form>
             </div>
         </div>
         <div class="button-group floatfix">
@@ -27,7 +51,26 @@
                 imgUrl: '',
                 day: 0,
                 opacityNum: 0,
-                loginData: {},
+                loginForm: {
+                    userName: ''
+                },
+                loaginMessage: '欢迎来到海德鲁大陆',
+                loginRules: {
+                    userName: [
+                        {
+                            required: true,
+                            message: '请补全信息',
+                            targger: 'blur' 
+                        }
+                    ],
+                    password: [
+                        {
+                            required: true,
+                            message: '请补全信息',
+                            targger: 'blur'
+                        }
+                    ]
+                }
             }
         },
         methods: {
@@ -88,6 +131,7 @@
         left: 0;
         bottom: 0;
         transition: opacity 0.5s;
+        background-size: cover
     }
     .button-group {
         width: 100%;
@@ -158,5 +202,14 @@
         filter: blur(30px);
         background: rgba(255,255,255,.6);
         z-index: -1;
+    }
+    .login-top {
+        text-align: center;
+        font-size: 24px;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+    .password {
+        margin-top: 10px;
     }
 </style>
