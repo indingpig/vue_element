@@ -2,7 +2,15 @@
     <div class="login-wrap">
         <div class="login-wrap-background" :style="{background:'url('+ imgUrl +')', opacity: opacityNum}">
         </div>
-        <div class="button-group">
+        <div class="login">
+            <div>
+                <label for="userName">用户名</label>
+                <input type="text" v-model="loginData.userName" id="userName">
+                <label for="password">登录密码</label>
+                <input type="password" v-model="loginData.password" id="password">
+            </div>
+        </div>
+        <div class="button-group floatfix">
             <div>
                 <a href="javasctipt:void(0)" @click="previous" class="button-previous"></a>
                 <a href="javasctipt:void(0)" @click="next" class="button-next"></a>
@@ -18,7 +26,8 @@
             return {
                 imgUrl: '',
                 day: 0,
-                opacityNum: 0
+                opacityNum: 0,
+                loginData: {}
             }
         },
         methods: {
@@ -114,5 +123,28 @@
     }
     .button-next::after {
         transform: rotate(-45deg)
+    }
+    /* 登录表单 */
+    .login {
+        position: absolute;
+        margin: auto;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        width: 400px;
+        height: 300px;
+        border-radius: 1%;
+        z-index: 1;
+    }
+    .login::after {
+        width: 400px;
+        height: 300px;
+        top: 0;
+        content: '';
+        position: absolute;
+        filter: blur(5px);
+        background: rgba(255,255,255,.6);
+        z-index: -1;
     }
 </style>

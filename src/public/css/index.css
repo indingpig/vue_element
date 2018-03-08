@@ -5,3 +5,10 @@
 html, body {
     height: 100%;
 }
+.float-fix::after {
+    content: '';
+    display: block;
+    visibility: hidden;
+    clear: both;
+    height: 0;
+}
