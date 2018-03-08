@@ -27,7 +27,7 @@
                 imgUrl: '',
                 day: 0,
                 opacityNum: 0,
-                loginData: {}
+                loginData: {},
             }
         },
         methods: {
@@ -49,18 +49,27 @@
                     console.log(error)
                 })
             },
-            previous(evt) {
+            previous() {
+                if (this.day >=7 ) {
+                    return
+                }
                 this.opacityNum = 0;
                 this.day += 1;
                 this.getImgData();
             },
             next() {
+                if (this.day <= -1) {
+                    return
+                }
                 this.opacityNum = 0;
                 this.day -= 1;
                 this.getImgData();
             }
         },
-        mounted: function() {
+        mounted() {
+            // this.getImgData();
+        },
+        created() {
             this.getImgData();
         }
     }
@@ -134,8 +143,11 @@
         bottom: 0;
         width: 400px;
         height: 300px;
-        border-radius: 1%;
+        border-radius: 3%;
         z-index: 1;
+        overflow: hidden;
+        box-shadow: 0px 5px 20px rgba(0,0,0,.5);
+        padding: 20px;
     }
     .login::after {
         width: 400px;
@@ -143,7 +155,7 @@
         top: 0;
         content: '';
         position: absolute;
-        filter: blur(5px);
+        filter: blur(30px);
         background: rgba(255,255,255,.6);
         z-index: -1;
     }
