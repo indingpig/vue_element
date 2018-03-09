@@ -101,7 +101,7 @@
     export default {
         data () {
             // 自定义校验;
-            var checkEmail = (rule, value, callback) => {
+            var passwordConfirm = (rule, value, callback) => {
                 if (!value) {
                  return callback(new Error('邮箱不能为空'));
                 }
