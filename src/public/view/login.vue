@@ -31,8 +31,61 @@
                     <!-- <div class="password">
                         
                     </div> -->
+                    <el-form-item>
+                        <el-button type="primary" @click="submitForm('loginFormRules')">登录</el-button>
+                        <el-button @click="dialogVisible = true">注册</el-button>
+                    </el-form-item>
                 </el-form>
             </div>
+        </div>
+        <!-- dialog 注册弹出框 -->
+        <div class="sign-up">
+            <el-dialog
+                title="欢迎注册"
+                :visible.sync="dialogVisible"
+                width="30%"
+                :before-close="handleClose"
+                class="test">
+                <el-form :model="siginUpForm"
+                    :rules="signUpRules"
+                    ref="signUpFormRules">
+                    <el-form-item prop="userEmail">
+                        <el-input
+                            placeholder="请输入邮箱"
+                            v-model="siginUpForm.userEmail"
+                            type="email"
+                            clearable>
+                        </el-input>
+                    </el-form-item>
+                    <el-form-item prop="userName">
+                        <el-input
+                            placeholder="请输入用户名"
+                            v-model="siginUpForm.userName"
+                            clearable>
+                        </el-input>
+                    </el-form-item>
+                    <el-form-item prop="password">
+                        <el-input
+                            placeholder="请输入密码"
+                            v-model="siginUpForm.password"
+                            clearable
+                            type="password">
+                        </el-input>
+                    </el-form-item>
+                    <el-form-item prop="password">
+                        <el-input
+                            placeholder="请确认密码"
+                            v-model="siginUpForm.passwordConfirm"
+                            clearable
+                            type="password">
+                        </el-input>
+                    </el-form-item>
+                </el-form>
+                <span slot="footer" class="dialog-footer">
+                    <el-button @click="dialogVisible = false">取 消</el-button>
+                    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+                </span>
+            </el-dialog>
         </div>
         <div class="button-group floatfix">
             <div>
@@ -47,6 +100,23 @@
     import axios from 'axios';
     export default {
         data () {
+            // 自定义校验;
+            var checkEmail = (rule, value, callback) => {
+                if (!value) {
+                 return callback(new Error('邮箱不能为空'));
+                }
+                setTimeout(() => {
+                    if (!Number.isInteger(value)) {
+                        callback(new Error('请输入数字值'));
+                    } else {
+                        if (value < 18) {
+                        callback(new Error('必须年满18岁'));
+                        } else {
+                        callback();
+                        }
+                    }
+                }, 1000);
+            };
             return {
                 imgUrl: '',
                 day: 0,
@@ -54,8 +124,12 @@
                 loginForm: {
                     userName: ''
                 },
-                loaginMessage: '欢迎来到海德鲁大陆',
+                siginUpForm: {
+
+                },
+                loaginMessage: '欢迎来到海拉尔大陆',
                 loginRules: {
+                    // 登录时校验
                     userName: [
                         {
                             required: true,
@@ -68,9 +142,23 @@
                             required: true,
                             message: '请补全信息',
                             targger: 'blur'
+                        },
+                    ]
+                },
+                signUpRules: {
+                    userEmail: [
+                        {
+                            required: true,
+                            message: '请补全信息'
+                        },
+                        {
+                            type: 'email',
+                            message: '请输入正确的邮箱地址',
+                            targger: 'blur'
                         }
                     ]
-                }
+                },
+                dialogVisible: false
             }
         },
         methods: {
@@ -107,6 +195,20 @@
                 this.opacityNum = 0;
                 this.day -= 1;
                 this.getImgData();
+            },
+            // 提交表单
+            submitForm(formName) {
+                this.$refs[formName].validate(function(valid){
+                    if (valid) {
+                        // 校验通过提交表单
+                    } else {
+                        console.log('error submit!!');
+                        return 
+                    }
+                })
+            },
+            handleClose() {
+                this.dialogVisible = false
             }
         },
         mounted() {
