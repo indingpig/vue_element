@@ -54,8 +54,7 @@
                             placeholder="请输入邮箱"
                             v-model="siginUpForm.userEmail"
                             type="email"
-                            clearable
-                            @blur="chechEmail(siginUpForm.userEmail)">
+                            clearable>
                         </el-input>
                     </el-form-item>
                     <el-form-item prop="userName">
@@ -115,6 +114,23 @@
                 }
                 callback();
             };
+            var chechEmail = (rule, value, callback) => {
+                debugger;
+                if (!value) {
+                    return callback(new Error('请输入邮箱'))
+                } else {
+                    axios.post('/api/query/checkEmail', {
+                        userEmail: self.siginUpForm.userEmail
+                        })
+                        .then((res) => {
+                            return callback(new Error('邮箱已注册，请换邮箱注册或者找回密码'))
+                        })
+                        .catch((error) => {
+                            console.log(error)
+                        })
+                };
+                callback()
+            };
             return {
                 imgUrl: '',
                 day: 0,
@@ -136,46 +152,51 @@
                         {
                             required: true,
                             message: '请补全信息',
-                            targger: 'blur' 
+                            trigger: 'blur' 
                         }
                     ],
                     password: [
                         {
                             required: true,
                             message: '请补全信息',
-                            targger: 'blur'
+                            trigger: 'blur'
                         },
                     ]
                 },
                 signUpRules: {
                     userEmail: [
+                        // {
+                        //     required: true,
+                        //     message: '请补全信息'
+                        // },
+                        // {
+                        //     type: 'email',
+                        //     message: '请输入正确的邮箱地址',
+                        // }
                         {
                             required: true,
-                            message: '请补全信息'
-                        },
-                        {
-                            type: 'email',
-                            message: '请输入正确的邮箱地址',
+                            validator: chechEmail,
+                            trigger: 'blur'
                         }
                     ],
                     userName: [
                         {
                             required: true,
                             message: '请填写用户名',
-                            targger: 'blur'
+                            trigger: 'blur'
                         },
                     ],
                     password: [
                         {
                             required: true,
                             message: '请输入密码',
-                            targger: 'blur'
+                            trigger: 'blur'
                         }
                     ],
                     passwordConfirm:[
                         {
                             validator: passwordConfirm,
-                            targger: blur,
+                            trigger: 'blur',
                             required: true
                         }
                     ]
