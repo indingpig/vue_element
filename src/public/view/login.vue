@@ -115,15 +115,25 @@
                 callback();
             };
             var chechEmail = (rule, value, callback) => {
-                debugger;
                 if (!value) {
-                    return callback(new Error('请输入邮箱'))
+                    axios.post('/api/query/checkEmail', {
+                        userEmail: self.siginUpForm.userEmail
+                    }).then((res) => {
+                        return callback(new Error('请输入邮箱'))
+                    })
+                    
                 } else {
                     axios.post('/api/query/checkEmail', {
                         userEmail: self.siginUpForm.userEmail
                         })
                         .then((res) => {
-                            return callback(new Error('邮箱已注册，请换邮箱注册或者找回密码'))
+                            if (res.data.valid) {
+                                // callback()
+                                return callback(new Error('请输入邮箱~~~~~~~~~~~'))
+                            } else {
+                                debugger
+                                return callback(new Error('邮箱已注册，请换邮箱注册或者找回密码'))
+                            }
                         })
                         .catch((error) => {
                             console.log(error)
