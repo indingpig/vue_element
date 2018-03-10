@@ -45,16 +45,17 @@
                 :visible.sync="dialogVisible"
                 width="30%"
                 :before-close="handleClose"
-                class="test">
+                class="">
                 <el-form :model="siginUpForm"
                     :rules="signUpRules"
-                    ref="signUpFormRules">
+                    ref="siginUpFormRules">
                     <el-form-item prop="userEmail">
                         <el-input
                             placeholder="请输入邮箱"
                             v-model="siginUpForm.userEmail"
                             type="email"
-                            clearable>
+                            clearable
+                            @blur="chechEmail(siginUpForm.userEmail)">
                         </el-input>
                     </el-form-item>
                     <el-form-item prop="userName">
@@ -72,7 +73,7 @@
                             type="password">
                         </el-input>
                     </el-form-item>
-                    <el-form-item prop="password">
+                    <el-form-item prop="passwordConfirm">
                         <el-input
                             placeholder="请确认密码"
                             v-model="siginUpForm.passwordConfirm"
@@ -83,7 +84,10 @@
                 </el-form>
                 <span slot="footer" class="dialog-footer">
                     <el-button @click="dialogVisible = false">取 消</el-button>
-                    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+                    <el-button type="primary" 
+                        @click="siginUp('siginUpFormRules')">
+                        注 册
+                    </el-button>
                 </span>
             </el-dialog>
         </div>
@@ -101,31 +105,29 @@
     export default {
         data () {
             // 自定义校验;
+            let self = this;
             var passwordConfirm = (rule, value, callback) => {
                 if (!value) {
-                 return callback(new Error('邮箱不能为空'));
+                 return callback(new Error('请再次输入密码!'));
+                };
+                if (value != self.siginUpForm.password) {
+                    return callback(new Error('密码不一致!!'));
                 }
-                setTimeout(() => {
-                    if (!Number.isInteger(value)) {
-                        callback(new Error('请输入数字值'));
-                    } else {
-                        if (value < 18) {
-                        callback(new Error('必须年满18岁'));
-                        } else {
-                        callback();
-                        }
-                    }
-                }, 1000);
+                callback();
             };
             return {
                 imgUrl: '',
                 day: 0,
                 opacityNum: 0,
+                checkForm: false,
                 loginForm: {
                     userName: ''
                 },
                 siginUpForm: {
-
+                    userEmail: '',
+                    userName: '',
+                    password: '',
+                    passwordConfirm: ''
                 },
                 loaginMessage: '欢迎来到海拉尔大陆',
                 loginRules: {
@@ -154,7 +156,27 @@
                         {
                             type: 'email',
                             message: '请输入正确的邮箱地址',
+                        }
+                    ],
+                    userName: [
+                        {
+                            required: true,
+                            message: '请填写用户名',
                             targger: 'blur'
+                        },
+                    ],
+                    password: [
+                        {
+                            required: true,
+                            message: '请输入密码',
+                            targger: 'blur'
+                        }
+                    ],
+                    passwordConfirm:[
+                        {
+                            validator: passwordConfirm,
+                            targger: blur,
+                            required: true
                         }
                     ]
                 },
@@ -207,6 +229,26 @@
                     }
                 })
             },
+            // 检测email是否重复
+            checkEmail(email){
+                console.log(email)
+            },
+            // 注册表单提交
+            siginUp(formName) {
+                let self = this;
+                this.$refs[formName].validate((vaild) =>{
+                    if (vaild) {
+                        // 校验通过
+                        debugger;
+                        axios.post('/api/query/signUp',self.siginUpForm)
+                            .then((res) => {
+
+                            })
+                    } else {
+                        // 可以写提示
+                    }
+                })
+            },
             handleClose() {
                 this.dialogVisible = false
             }
@@ -216,6 +258,11 @@
         },
         created() {
             this.getImgData();
+        },
+        watch: {
+            // 'siginUpForm.userEmail': (newVal, oldVal) => {
+            //     // console.log(`${newVal}----${oldVal}`)
+            // }
         }
     }
 </script>
