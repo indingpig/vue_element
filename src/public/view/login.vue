@@ -139,7 +139,6 @@
                             console.log(error)
                         })
                 };
-                callback()
             };
             return {
                 imgUrl: '',
