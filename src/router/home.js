@@ -5,9 +5,9 @@ const routers = [
         name: 'home',
         component (resolve) {
             require.ensure(
-                ['../components/Home.vue'],
+                ['../public/view/Home.vue'],
                 () => {
-                    resolve(require('../components/Home.vue'))
+                    resolve(require('../public/view/Home.vue'))
                 }
             )
         }

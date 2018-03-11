@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Header from './components/header';
+// import Header from './components/header';
 
 export default {
   name: 'app',
@@ -14,9 +14,9 @@ export default {
       msg: 'Vue Test'
     }
   },
-  components: {
-    Header
-  }
+  // components: {
+  //   Header
+  // }
 }
 </script>
 

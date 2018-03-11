@@ -1,10 +1,11 @@
 <template>
   <div>
-    首页
+    <v-header></v-header>
   </div>
 </template>
 
 <script>
+    import header from '../../components/header'
     export default {
         data () {
             return {
@@ -17,6 +18,10 @@
         },
         methods: {
 
+
+        },
+        components: {
+            'v-header': header,
         }
     }
 </script>
