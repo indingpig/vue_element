@@ -186,10 +186,6 @@
                 },
                 signUpRules: {
                     userEmail: [
-                        // {
-                        //     required: true,
-                        //     message: '请补全信息'
-                        // },
                         {
                             type: 'email',
                             message: '请输入正确的邮箱地址',
@@ -201,11 +197,6 @@
                         }
                     ],
                     userName: [
-                        // {
-                        //     required: true,
-                        //     message: '请填写用户名',
-                        //     trigger: 'blur'
-                        // },
                         {
                             validator: checkUserName,
                             trigger: 'blur',
@@ -275,20 +266,17 @@
                     }
                 })
             },
-            // 检测email是否重复
-            checkEmail(email){
-                console.log(email)
-            },
             // 注册表单提交
             siginUp(formName) {
                 let self = this;
                 this.$refs[formName].validate((vaild) =>{
                     if (vaild) {
                         // 校验通过
-                        debugger;
                         axios.post('/api/query/signUp',self.siginUpForm)
                             .then((res) => {
-
+                                if (res.data.status == '200') {
+                                    self.$router.push({path: '/home'})
+                                } 
                             })
                     } else {
                         // 可以写提示
