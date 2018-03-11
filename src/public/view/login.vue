@@ -105,7 +105,7 @@
         data () {
             // 自定义校验;
             let self = this;
-            var passwordConfirm = (rule, value, callback) => {
+            let passwordConfirm = (rule, value, callback) => {
                 if (!value) {
                  return callback(new Error('请再次输入密码!'));
                 };
@@ -114,24 +114,18 @@
                 }
                 callback();
             };
-            var chechEmail = (rule, value, callback) => {
+            // 检测邮箱是否被注册
+            let chechEmail = (rule, value, callback) => {
                 if (!value) {
-                    axios.post('/api/query/checkEmail', {
-                        userEmail: self.siginUpForm.userEmail
-                    }).then((res) => {
-                        return callback(new Error('请输入邮箱'))
-                    })
-                    
+                    return callback(new Error('请输入邮箱'))
                 } else {
-                    axios.post('/api/query/checkEmail', {
+                    axios.post('/api/query/checkData', {
                         userEmail: self.siginUpForm.userEmail
                         })
                         .then((res) => {
                             if (res.data.valid) {
-                                // callback()
-                                return callback(new Error('请输入邮箱~~~~~~~~~~~'))
+                                callback()
                             } else {
-                                debugger
                                 return callback(new Error('邮箱已注册，请换邮箱注册或者找回密码'))
                             }
                         })
@@ -139,6 +133,24 @@
                             console.log(error)
                         })
                 };
+            };
+            // 检测用户名是否被注册
+            let checkUserName = (rule, value, callback) => {
+                if (!value) {
+                    return callback(new Error('请输入用户名'));
+                } else {
+                    axios.post('/api/query/checkData', {
+                        userName: self.siginUpForm.userName
+                    }).then((res) => {
+                        if (res.data.valid) {
+                            callback()
+                        } else {
+                            return callback(new Error('用户名已经被注册，请更换用户名再尝试'))
+                        }
+                    }).catch((error) => {
+                        console.log(error)
+                    })
+                }
             };
             return {
                 imgUrl: '',
@@ -178,10 +190,10 @@
                         //     required: true,
                         //     message: '请补全信息'
                         // },
-                        // {
-                        //     type: 'email',
-                        //     message: '请输入正确的邮箱地址',
-                        // }
+                        {
+                            type: 'email',
+                            message: '请输入正确的邮箱地址',
+                        },
                         {
                             required: true,
                             validator: chechEmail,
@@ -189,11 +201,15 @@
                         }
                     ],
                     userName: [
+                        // {
+                        //     required: true,
+                        //     message: '请填写用户名',
+                        //     trigger: 'blur'
+                        // },
                         {
-                            required: true,
-                            message: '请填写用户名',
-                            trigger: 'blur'
-                        },
+                            validator: checkUserName,
+                            trigger: 'blur',
+                        }
                     ],
                     password: [
                         {
