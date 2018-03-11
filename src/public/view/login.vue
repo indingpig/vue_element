@@ -28,13 +28,13 @@
                             type="password">
                         </el-input>
                     </el-form-item>
-                    <!-- <div class="password">
-                        
-                    </div> -->
                     <el-form-item>
                         <el-button type="primary" @click="submitForm('loginFormRules')">登录</el-button>
                         <el-button @click="dialogVisible = true">注册</el-button>
                     </el-form-item>
+                    <div class="error" v-if="errorShow">
+                        <p>用户名或者密码错误</p>
+                    </div>
                 </el-form>
             </div>
         </div>
@@ -156,7 +156,7 @@
                 imgUrl: '',
                 day: 0,
                 opacityNum: 0,
-                checkForm: false,
+                errorShow: false,
                 loginForm: {
                     userName: ''
                 },
@@ -257,9 +257,19 @@
             },
             // 提交表单
             submitForm(formName) {
+                let self = this;
                 this.$refs[formName].validate(function(valid){
                     if (valid) {
-                        // 校验通过提交表单
+                        // 校验通过提交表单;
+                        axios.post('/api/query/loginUp', self.loginForm)
+                            .then((res) => {
+                                console.log(res)
+                                if (res.data.status == 1) {
+                                    self.$router.push({path: '/home'})
+                                } else {
+                                    self.errorShow = true
+                                }
+                            })
                     } else {
                         console.log('error submit!!');
                         return 
@@ -394,5 +404,8 @@
     }
     .password {
         margin-top: 10px;
+    }
+    .error > p {
+        color: #f56c6c;
     }
 </style>
