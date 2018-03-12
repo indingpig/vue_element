@@ -10,11 +10,11 @@
     export default {
         data () {
             return {
-                msg:　'头部'
+                msg:　'头部111'
             }
         },
         methods: {
-            mounted: function () {
+            mounted() {
                 
             }
         },

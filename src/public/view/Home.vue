@@ -1,11 +1,13 @@
 <template>
-  <div>
+  <div id="home">
     <v-header></v-header>
+    <v-aside></v-aside>
   </div>
 </template>
 
 <script>
-    import header from '../../components/header'
+    import header from '../../components/header';
+    import aside from '../../components/Aside.vue'
     export default {
         data () {
             return {
@@ -22,6 +24,13 @@
         },
         components: {
             'v-header': header,
+            'v-aside': aside,
         }
     }
 </script>
+
+<style>
+    #home {
+        height: 100%;
+    }
+</style>
