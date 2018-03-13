@@ -1,6 +1,6 @@
 <template>
   <div id="home">
-    <v-header></v-header>
+    <!-- <v-header></v-header> -->
     <v-aside></v-aside>
   </div>
 </template>
@@ -23,7 +23,7 @@
 
         },
         components: {
-            'v-header': header,
+            // 'v-header': header,
             'v-aside': aside,
         }
     }

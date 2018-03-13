@@ -1,11 +1,12 @@
 <template>
   <div id="app">
-      <router-view></router-view>
+    <v-header></v-header>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-// import Header from './components/header';
+import Header from './components/header';
 
 export default {
   name: 'app',
@@ -14,9 +15,9 @@ export default {
       msg: 'Vue Test'
     }
   },
-  // components: {
-  //   Header
-  // }
+  components: {
+    'v-header': Header
+  }
 }
 </script>
 

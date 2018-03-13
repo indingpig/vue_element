@@ -1,7 +1,11 @@
 <template>
   <div>
       <div class="header">
-        {{msg}}
+        <ul>
+            <li v-for="(val, index) in routerList" :key="index">
+                <router-link :to="val.path">{{val.linkName}}</router-link>
+            </li>
+        </ul>
       </div>
   </div>
 </template>
@@ -10,7 +14,11 @@
     export default {
         data () {
             return {
-                msg:　'头部111'
+                msg:　'头部111',
+                routerList: [
+                    {path: '/home', linkName: '首页'},
+                    {path: '/login', linkName: "登录页"}
+                ]
             }
         },
         methods: {
