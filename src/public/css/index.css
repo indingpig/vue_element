@@ -13,3 +13,12 @@ html, body {
     clear: both;
     height: 0;
 }
+ul li, ol li {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+}
+a:visited {
+    color: #888888
+}
