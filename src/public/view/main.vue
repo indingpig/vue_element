@@ -1,10 +1,12 @@
 <template>
   <div id="main">
-    第一页
+    <v-header></v-header>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
+    import Header from './../../components/header.vue'
     export default {
         data () {
             return {
@@ -20,7 +22,7 @@
 
         },
         components: {
-
+            'v-header': Header
         }
     }
 </script>

@@ -3,9 +3,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 // 引入路由模块
 import login from './login'
-import home from './home'
-import user from './user'
-
+import main from './main'
 
 // 安装路由
 
@@ -15,11 +13,10 @@ Vue.use(VueRouter);
 const routes = [
     {
         path: '',
-        redirect: '/home',
+        redirect: '/main',
     },
+    ...main,
     ...login,
-    ...home,
-    ...user,
 ];
 
 // 创建路由对象

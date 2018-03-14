@@ -1,6 +1,6 @@
 const routers = [
     {
-        path: '/user',
+        path: 'user',
         name: 'user',
         component (resolve) {
             require.ensure(
