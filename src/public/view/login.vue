@@ -265,7 +265,8 @@
                             .then((res) => {
                                 console.log(res)
                                 if (res.data.status == 1) {
-                                    self.$router.push({path: '/home'})
+                                    sessionStorage.setItem('currentUser', JSON.stringify(res.data.userData));
+                                    self.$router.push({path: '/main/home'})
                                 } else {
                                     self.errorShow = true
                                 }
@@ -285,7 +286,7 @@
                         axios.post('/api/query/signUp',self.siginUpForm)
                             .then((res) => {
                                 if (res.data.status == '200') {
-                                    self.$router.push({path: '/home'})
+                                    self.$router.push({path: '/main/home'})
                                 } 
                             })
                     } else {

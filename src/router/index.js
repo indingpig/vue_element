@@ -11,12 +11,12 @@ Vue.use(VueRouter);
 
 //配置路由
 const routes = [
+    ...login,
+    ...main,
     {
-        path: '',
+        path: '*',
         redirect: '/main',
     },
-    ...main,
-    ...login,
 ];
 
 // 创建路由对象

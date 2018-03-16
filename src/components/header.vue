@@ -6,27 +6,46 @@
                 <router-link :to="val.path">{{val.linkName}}</router-link>
             </li>
         </ul>
-        <div class="login-out">
-            
-        </div>
+        <!-- <div class="login-out"> -->
+                <!-- <img :src="userImage" alt="" class="user-img"> -->
+            <el-dropdown trigger="click">
+                <el-button>
+                    {{currentUser}}<i class="el-icon-arrow-down el-icon--right"></i>
+                </el-button>
+                <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item>黄金糕</el-dropdown-item>
+                    <el-dropdown-item>狮子头</el-dropdown-item>
+                    <el-dropdown-item>螺蛳粉</el-dropdown-item>
+                    <el-dropdown-item>双皮奶</el-dropdown-item>
+                    <el-dropdown-item>蚵仔煎</el-dropdown-item>
+                </el-dropdown-menu>
+            </el-dropdown>
+        <!-- </div> -->
       </div>
   </div>
 </template>
 
 <script>
+    import userImage from './../public/images/user.png';
     export default {
         data () {
             return {
                 routerList: [
                     {path: '/login', linkName: "登录页"},
                     {path: 'home', linkName: '首页'},
-                ]
+                ],
+                currentUser: '',
+                userImage: userImage
             }
         },
         methods: {
-            mounted() {
-                
-            }
+
+        },
+        mounted() {
+            
+        },
+        created() {
+            this.currentUser = JSON.parse(sessionStorage.getItem('currentUser')).userName;
         },
         computed: {
 
@@ -42,6 +61,9 @@
         text-align: center;
         line-height: 50px;
     }
+    .header .header-link-wrap {
+        display: inline-block;
+    }
     .header .header-link-wrap .header-link{
         float: right;
     }
@@ -51,8 +73,13 @@
         display: block;
         box-sizing: border-box;
         border-top: 2px solid transparent;
+        height: 50px;
     }
     .header .header-link-wrap .header-link a:hover {
         border-top: aqua 2px solid;
+    }
+    .header .login-out .user-img {
+        width: 40px;
+        height: 40px;
     }
 </style>
