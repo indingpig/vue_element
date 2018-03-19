@@ -1,5 +1,5 @@
 
-import addMenu from '../public/view/home/addMenu.vue'
+import addMenu from './home/addMenu'
 const routers = [
     {
         path: 'home',
