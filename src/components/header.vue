@@ -1,26 +1,23 @@
 <template>
   <div>
-      <div class="header">
+      <div class="header float-fix">
+        <el-dropdown trigger="click" class="header-float">
+            <el-button>
+                {{currentUser}}<i class="el-icon-arrow-down el-icon--right"></i>
+            </el-button>
+            <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item>黄金糕</el-dropdown-item>
+                <el-dropdown-item>狮子头</el-dropdown-item>
+                <el-dropdown-item>螺蛳粉</el-dropdown-item>
+                <el-dropdown-item>双皮奶</el-dropdown-item>
+                <el-dropdown-item>蚵仔煎</el-dropdown-item>
+            </el-dropdown-menu>
+        </el-dropdown>
         <ul class="float-fix header-link-wrap">
             <li v-for="(val, index) in routerList" :key="index" class="header-link">
                 <router-link :to="val.path">{{val.linkName}}</router-link>
             </li>
         </ul>
-        <!-- <div class="login-out"> -->
-                <!-- <img :src="userImage" alt="" class="user-img"> -->
-            <el-dropdown trigger="click">
-                <el-button>
-                    {{currentUser}}<i class="el-icon-arrow-down el-icon--right"></i>
-                </el-button>
-                <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item>黄金糕</el-dropdown-item>
-                    <el-dropdown-item>狮子头</el-dropdown-item>
-                    <el-dropdown-item>螺蛳粉</el-dropdown-item>
-                    <el-dropdown-item>双皮奶</el-dropdown-item>
-                    <el-dropdown-item>蚵仔煎</el-dropdown-item>
-                </el-dropdown-menu>
-            </el-dropdown>
-        <!-- </div> -->
       </div>
   </div>
 </template>
@@ -45,7 +42,11 @@
             
         },
         created() {
-            this.currentUser = JSON.parse(sessionStorage.getItem('currentUser')).userName;
+            let userName = JSON.parse(sessionStorage.getItem('currentUser')).userName
+            if (userName) {
+                
+            }
+            this.currentUser = userName;
         },
         computed: {
 
@@ -62,14 +63,17 @@
         line-height: 50px;
     }
     .header .header-link-wrap {
-        display: inline-block;
+        float: right;
+    }
+    .header .header-float {
+        float: right;
     }
     .header .header-link-wrap .header-link{
         float: right;
     }
     .header .header-link-wrap .header-link a {
         color: #fff;
-        padding: 0 5px;
+        padding: 0 15px;
         display: block;
         box-sizing: border-box;
         border-top: 2px solid transparent;
