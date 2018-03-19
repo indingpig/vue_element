@@ -1,7 +1,11 @@
 <template>
   <div id="aside">
       <div class="aside">
-          {{msg}}
+          <ul>
+              <li v-for="(val, key) in liList" :key="key">
+                  <router-link to="home/addMenu">{{val.linkName}}</router-link>
+              </li>
+          </ul>
       </div>
       <div class="main">
           11111
@@ -14,7 +18,9 @@
     export default {
         data () {
            return {
-                msg: "这是侧边栏"
+                liList: [
+                    {paht: 'addMenu', linkName: '新增菜单'}
+                ]
            }
         },
         methods: {

@@ -1,4 +1,5 @@
 
+import addMenu from '../public/view/home/addMenu.vue'
 const routers = [
     {
         path: 'home',
@@ -10,7 +11,10 @@ const routers = [
                     resolve(require('../public/view/Home.vue'))
                 }
             )
-        }
+        },
+        children: [
+            ...addMenu
+        ]
     }
 ]
 

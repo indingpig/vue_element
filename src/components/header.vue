@@ -6,11 +6,9 @@
                 {{currentUser}}<i class="el-icon-arrow-down el-icon--right"></i>
             </el-button>
             <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>黄金糕</el-dropdown-item>
-                <el-dropdown-item>狮子头</el-dropdown-item>
-                <el-dropdown-item>螺蛳粉</el-dropdown-item>
-                <el-dropdown-item>双皮奶</el-dropdown-item>
-                <el-dropdown-item>蚵仔煎</el-dropdown-item>
+                <el-dropdown-item >
+                    <p @click="logout">退出</p>
+                </el-dropdown-item>
             </el-dropdown-menu>
         </el-dropdown>
         <ul class="float-fix header-link-wrap">
@@ -24,19 +22,24 @@
 
 <script>
     import userImage from './../public/images/user.png';
+    import {_} from 'vue-underscore';
     export default {
         data () {
             return {
                 routerList: [
                     {path: '/login', linkName: "登录页"},
                     {path: 'home', linkName: '首页'},
+                    {path: 'music', linkName: '音乐'}
                 ],
                 currentUser: '',
                 userImage: userImage
             }
         },
         methods: {
-
+            logout() {
+                sessionStorage.removeItem('currentUser');
+                this.$router.push({path: '/login'})
+            }
         },
         mounted() {
             
@@ -44,7 +47,10 @@
         created() {
             let userName = JSON.parse(sessionStorage.getItem('currentUser')).userName
             if (userName) {
-                
+                let i = _.findIndex(this.routerList, (e)=>{
+                    return e.linkName == '登录页'
+                })
+                this.routerList.splice(0,1)
             }
             this.currentUser = userName;
         },
