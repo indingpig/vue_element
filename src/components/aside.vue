@@ -7,9 +7,6 @@
               </li>
           </ul>
       </div>
-      <div class="main">
-        <router-view></router-view>
-      </div>
   </div>
 </template>
 
@@ -32,13 +29,14 @@
 <style>
     #aside {
         height: 100%;
-        width: 100%;
+        width: 10%;
+        float: left;
     }
     .aside {
         height: 100%;
-        float: left;
+        /* float: left; */
         background: plum;
-        width: 10%;
+        width: 100%;
     }
     .main {
         float: left;

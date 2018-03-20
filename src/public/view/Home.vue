@@ -2,6 +2,9 @@
   <div id="home">
     <!-- <v-header></v-header> -->
     <v-aside></v-aside>
+    <div class="main">
+        <router-view></router-view>
+    </div>
   </div>
 </template>
 

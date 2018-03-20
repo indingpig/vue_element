@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="add-menu">
       {{msg}}
   </div>
 </template>
