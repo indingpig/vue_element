@@ -3,12 +3,11 @@
       <div class="aside">
           <ul>
               <li v-for="(val, key) in liList" :key="key">
-                  <router-link to="home/addMenu">{{val.linkName}}</router-link>
+                  <router-link :to="val.path">{{val.linkName}}</router-link>
               </li>
           </ul>
       </div>
       <div class="main">
-          11111
         <router-view></router-view>
       </div>
   </div>
@@ -19,7 +18,8 @@
         data () {
            return {
                 liList: [
-                    {paht: 'addMenu', linkName: '新增菜单'}
+                    {path: 'addShop', linkName: '新增店铺'},
+                    {path: 'addMenu', linkName: '新增菜单'},
                 ]
            }
         },
