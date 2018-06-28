@@ -15,8 +15,8 @@
         data () {
            return {
                 liList: [
-                    {path: 'addShop', linkName: '新增店铺'},
-                    {path: 'addMenu', linkName: '新增菜单'},
+                    {path: '/main/home/addShop', linkName: '新增店铺'},
+                    {path: '/main/home/addMenu', linkName: '新增菜单'},
                 ]
            }
         },
