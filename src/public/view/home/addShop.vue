@@ -83,7 +83,8 @@ export default {
   methods: {
     confirm(e) {
       console.log(111);
-
+      let headerLevel1Colspan = this.BGameSelectList.length + this.RGameSelectList.length + this.TGameSelectList.length; // 表头1的跨度；
+      let headerLevel2Colspan = this
     },
     refresh() {
         this.columns = [				// 渲染的列
