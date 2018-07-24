@@ -13,6 +13,10 @@ import webix from './webix/webix';
 import vueWebix from 'vue-webix';
 // 引入element-ui样式;
 import 'element-ui/lib/theme-chalk/index.css'
+import '../node_modules/formiojs/dist/formio.full.css'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
 import App from './App.vue';
 
 Vue.use(ElementUi);

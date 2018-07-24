@@ -59,6 +59,7 @@ export default {
       RGameSelectList: [], // 3
       TGameSelectList: [], // 3
       columns:[],
+      talbleData: [{"type":"调整adjusted","departNameCnO":"总部/信息技术部/IT开发部","departNameEnO":"Headquarter/ IT Dept./IT Dev. Dept.","principalO":"陈俊堂","DeptFunctionCNO":"部门定位：XXX\r\n1. 职能总结（2-8字短语）\r\n详细描述（1-3句话）\r\n2. XXX\r\nxxxx","DeptFunctionENO":"Department Position：XXX\r\n1. Function conclusion（a phrase with 2 -8 words)\r\nDetailed function (1-3 sentence)\r\n2. XXX\r\nxxxx","departNameCnU":"总部/信息技术部/IT管理部","departNameEnU":"Headquarter/ IT Dept./IT Management Dept.","principalU":"陈俊堂","DeptFunctionCNU":"部门定位：XXX\r\n1. 职能总结（2-8字短语）\r\n详细描述（1-3句话）\r\n2. XXX\r\nxxxx","DeptFunctionENU":"Department Position：XXX\r\n1. Function conclusion（a phrase with 2 -8 words)\r\nDetailed function (1-3 sentence)\r\n2. XXX\r\nxxxx"},{"type":"新增added","departNameCnO":null,"departNameEnO":null,"principalO":null,"DeptFunctionCNO":null,"DeptFunctionENO":null,"departNameCnU":"总部/信息技术部/信息保密处","departNameEnU":"Headquarter/ IT Dept./Information Security Dept.","principalU":"陈俊堂","DeptFunctionCNU":"部门定位：XXX\r\n1. 职能总结（2-8字短语）\r\n详细描述（1-3句话）\r\n2. XXX\r\nxxxx","DeptFunctionENU":"Department Position：XXX\r\n1. Function conclusion（a phrase with 2 -8 words)\r\nDetailed function (1-3 sentence)\r\n2. XXX\r\nxxxx"},{"type":"删除deleted","departNameCnO":"总部/信息技术部/IT运维部","departNameEnO":"Headquarter/ IT Dept./IT Operation Dept.","principalO":"陈俊堂","DeptFunctionCNO":"部门定位：XXX\r\n1. 职能总结（2-8字短语）\r\n详细描述（1-3句话）\r\n2. XXX\r\nxxxx","DeptFunctionENO":"Department Position：XXX\r\n1. Function conclusion（a phrase with 2 -8 words)\r\nDetailed function (1-3 sentence)\r\n2. XXX\r\nxxxx","departNameCnU":null,"departNameEnU":null,"principalU":null,"DeptFunctionCNU":null,"DeptFunctionENU":null}],
       dataTable: {
             view: "datatable",		// 渲染的格式
             container: "mytable",	// 渲染区的容器
@@ -82,11 +83,12 @@ export default {
   },
   methods: {
     confirm(e) {
-      console.log(111);
-      let headerLevel1Colspan = this.BGameSelectList.length + this.RGameSelectList.length + this.TGameSelectList.length; // 表头1的跨度；
-      let headerLevel2Colspan = {
-          
-      }
+        webix.toExcel($$("mytable"), {
+            styles:true,
+            spans:true
+        });
+        // http://cdn.webix.com/extras/xlsx.core.min.js
+        // http://cdn.webix.com/extras/xlsx.core.styles.min.js
     },
     refresh() {
         this.columns = [				// 渲染的列
@@ -105,6 +107,7 @@ export default {
                 // { id: "officeAreaU", editor: "text", header: ['', messService.getMess("com.hytera.org.OfficeArea")] },
         ];
         $$("mytable").define("columns", this.columns);
+        $$("mytable").define("data", this.talbleData);
         $$('mytable').refresh();
     }
   }

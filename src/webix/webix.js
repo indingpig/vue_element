@@ -14559,7 +14559,7 @@ window.webix || (webix = {}), webix.version = "4.2.16", webix.codebase = "./", w
         }, webix.toExcel = function(t, s) {
             var n = webix.promise.defer(),
                 o = webix.$$(t);
-            return s = s || {}, o.$exportView && (o = o.$exportView(s)), webix.require(webix.cdn + "/extras/xlsx.core.min.js", function() {
+            return s = s || {}, o.$exportView && (o = o.$exportView(s)), webix.require(webix.cdn + "/extras/xlsx.core.styles.min.js", function() {
                 s.gB = "excel";
                 var t = e(o, s),
                     l = i(o, s, t),
