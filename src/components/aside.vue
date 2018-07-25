@@ -42,5 +42,6 @@
         float: left;
         width: 90%;
         height: 100%;
+        padding: 10px;
     }
 </style>
