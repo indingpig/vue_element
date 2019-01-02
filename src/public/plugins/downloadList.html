@@ -1,0 +1,8 @@
+<div class="input-group">
+    <div class="uploadfiles-download">
+        <input type="hidden" ng-model="data[componentId]" name="{{componentId}}" id="{{componentId}}">
+        <div ng-repeat="file in fileList">
+            <a ng-href="{{file.link}}" ng-bind="file.name"></a>
+        </div>
+    </div>
+</div>

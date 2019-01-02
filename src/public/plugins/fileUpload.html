@@ -1,0 +1,31 @@
+<div class="input-group">
+	<input type="hidden" ng-model="data[component.key]" name="{{componentId}}" id="{{componentId}}" ng-required="isRequired(component)">
+	<button type="button" ng-disabled="isDisabled(component)" class="btn btn-info" ng-click="$emit('buttonClick', component, componentId)" ng-bind=" 'com.hytera.upload' | mess"></button>
+		&nbsp;
+	<button type="button" class="btn btn-default" ng-click="$emit('queryClick', component, componentId)" ng-bind="'com.hytera.viewFile' |mess"></button>
+	<!-- <span style="width:15%;margin-left:3%" ng-if="uploadTotal > 0">已上传：{{uploadTotal}}</span>
+	<span class="glyphicon glyphicon-star" aria-hidden="true"></span> -->
+</div>
+
+<!-- modal -->
+<div class="">
+	<script type="text/ng-template" id="fileDialog.html">
+		<div ng-include="'admin/admin/modals/modal.fileUpload.html'"></div>
+	</script>
+</div>
+<!-- /modal -->
+
+<!-- modal -->
+<div class="">
+	<script type="text/ng-template" id="fileList.html">
+		<div class="modal-body">
+			<div class="table-responsive">
+				<div ng-grid="gridOptions"  style="min-height:350px"></div>
+			</div>
+		</div>
+		<div class="modal-footer">                  
+    		<button class="btn btn-default" ng-click="cancel()" ng-bind="'com.hytera.confirm'|mess"></button>
+		</div>
+	</script>
+</div>
+<!-- /modal -->

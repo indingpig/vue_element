@@ -1,0 +1,127 @@
+<div class="placeholder">
+    <div id="{{componentId + 'placeholder'}}">placeholder</div>
+    <div class="input-group permission" ng-if="lookupType == 'supplierProduct'">
+        <table>
+            <tr>
+                <th>一级品类<span class="required"> *</span></th>
+                <th>二级品类<span class="required"> *</span></th>
+                <th>制造商</th>
+                <th>来源<span class="required"> *</span></th>
+                <th colspan="2">代理证有效期</th>
+            </tr>
+            <tr>
+                <td>
+                    <ui-select ui-select-required ui-select-open-on-focus safe-multiple-to-single name="{{}}" id="{{}}" ng-disabled="readOnly"
+                        ng-model="addData.productSort" theme="bootstrap" ng-change="getProducts(addData.productSort)" class="fix-width-100 supplier-cate fix-min-width">
+                        <ui-select-match class="ui-select-match">
+                            <span ng-bind="$select.selected.category"></span>
+                        </ui-select-match>
+                        <ui-select-choices class="ui-select-choices" repeat="item in (productSorts | filter:$select.search)">
+                            <span ng-bind="item.category"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                </td>
+                <td>
+                    <ui-select ui-select-required ui-select-open-on-focus safe-multiple-to-single name="{{}}" id="{{}}" ng-disabled="readOnly"
+                        ng-model="addData.product" theme="bootstrap" ng-change="getProductType(addData.product)" class="fix-width-100 supplier-cate fix-min-width">
+                        <ui-select-match class="ui-select-match">
+                            <span ng-bind="$select.selected.category"></span>
+                        </ui-select-match>
+                        <ui-select-choices class="ui-select-choices" repeat="item in (productList | filter:$select.search)">
+                            <span ng-bind="item.category"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                </td>
+                <td>
+                    <ui-select ui-select-required ui-select-open-on-focus safe-multiple-to-single name="{{}}" id="{{}}" ng-disabled="readOnly"
+                        ng-model="addData.productType" theme="bootstrap" ng-change="getNothing(addData.productType)" class="fix-width-100 supplier-cate fix-min-width">
+                        <ui-select-match class="ui-select-match">
+                            <span ng-bind="$select.selected.category"></span>
+                        </ui-select-match>
+                        <ui-select-choices class="ui-select-choices" repeat="item in (productTypeList | filter:$select.search)">
+                            <span ng-bind="item.category"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                </td>
+                <td>
+                    <ui-select ui-select-required ui-select-open-on-focus safe-multiple-to-single name="{{}}" id="{{}}" ng-disabled="readOnly"
+                        ng-model="addData.productsSource" theme="bootstrap" class="fix-width-100 supplier-cate fix-min-width">
+                        <ui-select-match class="ui-select-match">
+                            <span ng-bind="$select.selected.itemValue"></span>
+                        </ui-select-match>
+                        <ui-select-choices class="ui-select-choices" repeat="item in (productsSourceList | filter:$select.search)">
+                            <span ng-bind="item.itemValue"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                </td>
+                <td>
+                    <div class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup ng-model="addData.date" is-open="popup.datePopup" datepicker-options="options"
+                            close-text="Close" ng-readonly="true" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="dateOpen()">
+                                <i class="fa-calendar"></i>
+                            </button>
+                        </span>
+                    </div>
+                </td>
+                <td ng-show="!isDisabled(component)">
+                    <button class="btn btn-success" type="button" ng-click="addRow(addData)" ng-bind="'button.add'|mess" ng-disabled="isDisabled(component)"></button>
+                </td>
+            </tr>
+            <tr ng-repeat="(key, item) in data[componentId]">
+                <td>{{item.productSort.category}}</td>
+                <td>{{item.product.category}}</td>
+                <td>{{item.productType.category}}</td>
+                <td>{{item.productsSource.itemValue}}</td>
+                <td>{{item.date | date:'yyyy-MM-dd'}}</td>
+                <td ng-show="!isDisabled(component)">
+                    <button class="btn btn-danger" type="button" ng-bind="'button.delete'|mess" ng-click="removeRow(key)" ng-disabled="isDisabled(component)"></button>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5">
+                    <input type="hidden" ng-model="data[component.key]" ng-required="isRequired(component)" name="{{componentId}}">
+                    <div ng-show="formioForm.{{componentId}}.$error && !formioForm.{{componentId}}.$pristine" class="error-show" style="padding-left: 0">
+                        <p ng-show="formioForm.{{componentId}}.$error.required" style="color:#a94442;text-align:left;">请添加至少一项产品</p>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div ng-if="lookupType == 'supplierChange'">
+        <div id="{{componentId}}"></div>
+    </div>
+</div>
+
+<style>
+    .permission > table {
+        width: 100%;
+    }
+    .permission > table > tbody > tr > th, .permission > table > tbody > tr > td {
+        /* border: 1px solid #ddd; */
+        padding: 8px;
+        line-height: 1.4285;
+        vertical-align: top;
+        font-weight: 100;
+        width: 15%;
+        /* text-align: center; */
+    }
+    .permission > table > tbody > tr > td:last-child{
+        width: 10%;
+    }
+    .permission > table > tbody > tr > td:nth-child(5){
+        width: 30%;
+    }
+    .supplier-cate.fix-min-width{
+        min-width: 160px;
+    }
+    .permission .required {
+        color: red;
+    }
+    .placeholder {
+        min-height: 30px;
+    }
+    .supplier-header{color:#4a4a4a;background:#e3e6e8;}
+</style>

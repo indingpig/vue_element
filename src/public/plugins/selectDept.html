@@ -1,0 +1,29 @@
+<div class="input-group">
+  <input
+    type="text"
+    class="form-control"
+    name="{{ componentId }}_fullName"
+    id="{{ componentId }}_fullName"
+    readonly="readonly"
+    ng-required="isRequired(component)"
+    custom-validator="component.validate.custom"
+    ng-model="data[component.key+'fullName']"
+    tabindex="{{ component.tabindex || 0 }}"
+    ng-attr-placeholder="{{ component.placeholder | formioTranslate:null:builder }}"
+  />
+  <input type="hidden" ng-model="data[component.key]" name="{{componentId}}" id="{{componentId}}"></input>
+  <input type="hidden" ng-model="data[component.key+'Data']" name="{{componentId}}_data" id="{{componentId}}_data"></input>
+  <span class="input-group-btn">
+    <button type="button" ng-readonly="true" class="btn btn-default" ng-click="$emit('buttonClick', component, componentId)">
+      <i class="fa fa-search"></i>
+    </button>
+  </span> 
+</div>
+
+<!-- modal -->
+<div class="">
+	<script type="text/ng-template" id="selectDeptDialog.html">
+		<div ng-include="'admin/admin/modals/modal.deptZtree.html'"></div>
+	</script>
+</div>
+<!-- /modal -->

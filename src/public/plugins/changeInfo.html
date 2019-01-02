@@ -1,0 +1,22 @@
+<div class="" name="{{ componentId }}" id="{{ componentId }}" style="margin-right:-38%">
+    <div class="input-group changeInfo">
+        <div class="changeInfo-top changeInfo-line">
+            <div class="changeInfo-msg" ng-bind="'com.hytera.ItemToBeChanged' | mess"></div>
+            <div class="changeInfo-msg" ng-bind="'com.hytera.OrignialInformation' | mess"></div>
+            <div class="changeInfo-msg" ng-bind="'com.hytera.UpdatedInformation' | mess"></div>
+            <div class="changeInfo-msg" ng-bind="'com.hytera.TheFinalAdjustmentInformation' | mess"></div>
+        </div>
+        <div class="input-group"  ng-repeat="(item, val) in data[component.key]">
+            
+            <div ng-if="item != 'shareholderInfos' && item != 'branchCode'" class="changeInfo-line">
+                <div class="changeInfo-msg" ng-bind="'com.hytera.'+ item | mess"></div>
+                <div class="changeInfo-msg" ng-bind="val.Original"></div>
+                <div class="changeInfo-msg" ng-bind="val.Update"></div>
+                <div class="changeInfo-msg">
+                    <input type="text" name="{{componentId}}_final" id="{{componentId}}_final" ng-model="data['chooseDeptChangeInfo'][item]['Final']">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- {{data['chooseDeptChangeInfo']}} -->
+</div>
