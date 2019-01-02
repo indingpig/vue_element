@@ -9,8 +9,8 @@ import ElementUi from 'element-ui';
 import underscore from 'vue-underscore';
 // webix UI
 import './webix/webix.css';
-import webix from './webix/webix';
-import vueWebix from 'vue-webix';
+// import webix from './webix/webix';
+// import vueWebix from 'vue-webix';
 // 引入element-ui样式;
 import 'element-ui/lib/theme-chalk/index.css'
 import '../node_modules/formiojs/dist/formio.full.css'

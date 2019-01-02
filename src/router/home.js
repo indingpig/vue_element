@@ -1,6 +1,7 @@
 
-import addMenu from './home/addMenu'
-import addShop from './home/addShop'
+import addMenu from './home/addMenu';
+import addShop from './home/addShop';
+import testPage from './home/testPage';
 const routers = [
     {
         path: 'home',
@@ -15,7 +16,8 @@ const routers = [
         },
         children: [
             ...addMenu,
-            ...addShop
+            ...addShop,
+            ...testPage
         ]
     }
 ]
