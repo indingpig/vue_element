@@ -15,7 +15,7 @@
     "bootstrap-vue": "^2.0.0-rc.11",
     "element-ui": "^2.2.0",
     "vue": "^2.5.11",
-    "vue-formio": "^1.0.1",
+    "vue-formio": "^3.0.0",
     "vue-router": "^3.0.1",
     "vue-underscore": "^0.1.4",
     "vue-webix": "^1.3.0"

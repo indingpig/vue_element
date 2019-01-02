@@ -18,6 +18,7 @@
                     {path: '/main/home/addShop', linkName: '新增店铺'},
                     {path: '/main/home/addMenu', linkName: '新增菜单'},
                     {path: '/main/home/testPage', linkName: '测试页面'},
+                    {path: '/main/home/form', linkName: '表单'},
                 ]
            }
         },
