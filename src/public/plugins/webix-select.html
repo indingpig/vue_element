@@ -1,9 +1,0 @@
-<div class="input-group" style="width:100%;">
-    <input type="hidden" ng-model="data[componentId]" name="{{componentId}}" id="{{componentId}}_data" ng-required="isRequired(component)" custom-validator="component.validate.custom">
-    <div id="{{componentId}}">
-        <div id="{{componentId}}_placeholder">
-            <uib-progressbar class="progress-btn progress-striped" value="dynamic" type="info"><i>loading</i></uib-progressbar>
-        </div>
-    </div>
-    <webix-rich-select data-disabled="isDisabled(component)" data-isdisabled="isdisabled"></webix-rich-select>
-</div>

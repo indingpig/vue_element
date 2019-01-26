@@ -1,9 +1,11 @@
 <template>
     <div>
         <div style="margin-left: 5px;">
-            <el-button type="primary" plain @click="queryData">请求数据</el-button>
+            <el-button type="primary" plain @click="queryData" ref="queryBtn">请求数据</el-button>
             <el-button type="primary" plain @click="refresh">刷新</el-button>
-            <div></div>
+            <div ref="xxxxx">
+              <button>xxxxxxxx</button>
+            </div>
         </div>
     </div>
 </template>
@@ -20,11 +22,11 @@ export default {
   },
   methods: {
     async queryData() {
-      console.time();
-      let v1 = await axios.get("/api/query/vue/getTextPage?time=1000");
-      let v2 = await axios.get("/api/query/vue/getTextPage?time=" + v1.data);
-      console.log(`${v1.data} ---------${v2.data}`);
-      console.timeEnd();
+      // console.time();
+      // let v1 = await axios.get("/api/query/vue/getTextPage?time=1000");
+      // let v2 = await axios.get("/api/query/vue/getTextPage?time=" + v1.data);
+      // console.log(`${v1.data} ---------${v2.data}`);
+      // console.timeEnd();
     },
     refresh() {
       // this.queryData();
