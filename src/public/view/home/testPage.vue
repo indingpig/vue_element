@@ -1,13 +1,13 @@
 <template>
-    <div>
-        <div style="margin-left: 5px;">
-            <el-button type="primary" plain @click="queryData" ref="queryBtn">请求数据</el-button>
-            <el-button type="primary" plain @click="refresh">刷新</el-button>
-            <div ref="xxxxx">
-              <button>xxxxxxxx</button>
-            </div>
-        </div>
+  <div>
+    <div style="margin-left: 5px;">
+      <el-button type="primary" plain @click="queryData" ref="queryBtn">请求数据</el-button>
+      <el-button type="primary" plain @click="refresh">刷新</el-button>
+      <div ref="xxxxx">
+        <button>xxxxxxxx</button>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -34,13 +34,12 @@ export default {
       // console.log(testPoint.toString());
       // this.test();
       let that = this;
-      axios.get("/api/test1")
-        .then((_data) => {
-          that.data1 = _data.data;
-          that.data2 = _data.data;
-          that.data2.a = 2;
-          debugger;  
-        });
+      axios.get("/api/test1").then(_data => {
+        that.data1 = _data.data;
+        that.data2 = _data.data;
+        that.data2.a = 2;
+        debugger;
+      });
     },
     test(_x, _y) {
       // console.log(this.dedupe([1,1,1,2,3,3,1,2,5,3,{},{}]))
