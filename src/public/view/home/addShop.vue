@@ -1,101 +1,113 @@
 <template>
   <div>
-      <div style="margin-left: 5px;">
-          <el-button type="primary" plain @click="confirm">确定</el-button>
-          <el-button type="primary" plain @click="refresh">刷新</el-button>
-      </div>
-      <div>
-          <!-- <webix-ui :config="dataTable" id="mytable"/> -->
-        formio 测试页面
-      </div>
+    <el-radio-group v-model="labelPosition" size="small">
+      <el-radio-button label="left">左对齐</el-radio-button>
+      <el-radio-button label="right">右对齐</el-radio-button>
+      <el-radio-button label="top">顶部对齐</el-radio-button>
+    </el-radio-group>
+    <div style="margin: 20px;"></div>
+    <el-form :label-position="labelPosition" label-width="80px" :model="formLabelAlign">
+      <el-form-item label="名称">
+        <!-- <el-select v-model="value1" placeholder="请选择">
+          <el-option
+            v-for="item in options1"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+          </el-option>
+        </el-select> -->
+      </el-form-item>
+      <el-form-item label="活动区域">
+        <!-- <el-select v-model="value2" placeholder="请选择">
+          <el-option
+            v-for="item in options2"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+          </el-option>
+        </el-select> -->
+      </el-form-item>
+      <el-form-item label="活动形式">
+        <!-- <el-select v-model="value3" placeholder="请选择">
+          <el-option
+            v-for="item in options3"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+          </el-option>
+        </el-select> -->
+      </el-form-item>
+      <el-form-item label="地址" v-once>
+        <el-cascader
+          v-model="value4"
+          :options="region"
+          @change="handleChange"></el-cascader>
+      </el-form-item>
+      <el-form-item label="地址1" v-once>
+        <el-cascader
+          v-model="value5"
+          :options="region"
+          @change="handleChange"></el-cascader>
+      </el-form-item>
+      <el-form-item label="地址3" v-once>
+        <el-cascader
+          v-model="value1"
+          :options="region"
+          @change="handleChange"></el-cascader>
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 
 <script>
-import {_} from 'underscore';
+import axios from "axios";
+import region from '../../../assets/region.json';
 export default {
+  name: 'el-select-test',
   data() {
     return {
-      msg: "增加店铺",
-      columns:[],
-      talbleData: [{"type":"调整adjusted","departNameCnO":"总部/信息技术部/IT开发部","departNameEnO":"Headquarter/ IT Dept./IT Dev. Dept.","principalO":"陈俊堂","DeptFunctionCNO":"部门定位：XXX\r\n1. 职能总结（2-8字短语）\r\n详细描述（1-3句话）\r\n2. XXX\r\nxxxx","DeptFunctionENO":"Department Position：XXX\r\n1. Function conclusion（a phrase with 2 -8 words)\r\nDetailed function (1-3 sentence)\r\n2. XXX\r\nxxxx","departNameCnU":"总部/信息技术部/IT管理部","departNameEnU":"Headquarter/ IT Dept./IT Management Dept.","principalU":"陈俊堂","DeptFunctionCNU":"部门定位：XXX\r\n1. 职能总结（2-8字短语）\r\n详细描述（1-3句话）\r\n2. XXX\r\nxxxx","DeptFunctionENU":"Department Position：XXX\r\n1. Function conclusion（a phrase with 2 -8 words)\r\nDetailed function (1-3 sentence)\r\n2. XXX\r\nxxxx"},{"type":"新增added","departNameCnO":null,"departNameEnO":null,"principalO":null,"DeptFunctionCNO":null,"DeptFunctionENO":null,"departNameCnU":"总部/信息技术部/信息保密处","departNameEnU":"Headquarter/ IT Dept./Information Security Dept.","principalU":"陈俊堂","DeptFunctionCNU":"部门定位：XXX\r\n1. 职能总结（2-8字短语）\r\n详细描述（1-3句话）\r\n2. XXX\r\nxxxx","DeptFunctionENU":"Department Position：XXX\r\n1. Function conclusion（a phrase with 2 -8 words)\r\nDetailed function (1-3 sentence)\r\n2. XXX\r\nxxxx"},{"type":"删除deleted","departNameCnO":"总部/信息技术部/IT运维部","departNameEnO":"Headquarter/ IT Dept./IT Operation Dept.","principalO":"陈俊堂","DeptFunctionCNO":"部门定位：XXX\r\n1. 职能总结（2-8字短语）\r\n详细描述（1-3句话）\r\n2. XXX\r\nxxxx","DeptFunctionENO":"Department Position：XXX\r\n1. Function conclusion（a phrase with 2 -8 words)\r\nDetailed function (1-3 sentence)\r\n2. XXX\r\nxxxx","departNameCnU":null,"departNameEnU":null,"principalU":null,"DeptFunctionCNU":null,"DeptFunctionENU":null}],
-      dataTable: {
-            view: "datatable",		// 渲染的格式
-            container: "mytable",	// 渲染区的容器
-            id: "mytable",			// 必须，与渲染的容器的id相对应
-            autoheight: true,
-            fixedRowHeight:false,
-            rowLineHeight:34, 
-            rowHeight:34,
-            editable: true, 	// 可编辑	
-            editaction: "dblclick",	// 双击可编辑	
-            select: "row",			// 点击选择行
-            multiselect: true,		// 行多选
-            resizeColumn: true,		// 列的宽度可拖动
-            resizeRow:true,
-            leftSplit: 1,			// 冻结第一列
-            scorllX:true,
-            tooltip:true,			// 鼠标悬浮提示框
-            // columns: this.columns,
-            ready: function() {
-                var self = this;
-                webix.ui({
-                    id: 'cell-dropdown',
-                    view: 'contextmenu',
-                    css:'fix-webix-dropdown',
-                    data:[{id: 'copy', value: 'copy down'}],
-                    on:{
-                        onItemClick:function(id){
-                            var colId = this.getContext().id.column;
-                            var reg = /^(mgrtAttachName|sysName|deptFullName|deptLevel|deptCode|departmentHeadJob|departmentHeadName|departmentHead|sysCategoryName|approveItemName)$/
-                            // if (reg.test(colId)) {
-                            //     webix.message({type: 'error', text: 'something error'});
-                            //     return
-                            // }
-                            var item = self.getItem(this.getContext().id);
-                            var tableItemList = self.getSelectedItem();
-                            debugger;
-                            _.each(tableItemList, function(_e, _i) {
-                                _e[colId] = item[colId];
-                                _e.isChange = true;
-                            })
-                            self.refresh();
-                        }
-                    }
-                }).attachTo(this)
-            },
-		}
+      labelPosition: 'right',
+      formLabelAlign: {
+        name: '',
+        region: '',
+        type: ''
+      },
+      region: region.data,
+      api: '/api/query/selectAll',
+      options1: [],
+      options2: [],
+      options3: [],
+      options4: [],
+      options5: [],
+      value1: '',
+      value2: '',
+      value3: '',
+      value4: '',
+      value5: '',
     };
   },
   methods: {
-    confirm(e) {
-        // webix.toExcel($$("mytable"), {
-        //     styles:true,
-        //     spans:true
-        // });
-        console.warn("webix 代码已经被注释");
+    getSelect() {
+      axios.post(this.api)
+        .then(_res => {
+          this.options1 = _res.data;
+          this.options2 = _res.data;
+          this.options3 = _res.data;
+          this.options4 = _res.data;
+          this.options5 = _res.data;
+        });
     },
-    refresh() {
-        this.columns = [				// 渲染的列
-                { id: "type", editor: "text", header: [{ text: '编辑', css: { "text-align": "center" } }], width: 60, css: { "text-align": "center" } },
-                { id: "departNameCnO", editor: "popup", header: [{ text: '调整前', colspan: 5, css: { "text-align": "center" } }, '中文名'], width:100,}, //合并单元格 100
-                { id: "departNameEnO", editor: "text", header: ['', '英文名'],width:100 }, //100
-                { id: "principalO", editor: "text", header: ['', '负责人'] },
-                { id: "DeptFunctionCNO", editor: "popup", header: ['', '职能'], width:150 },
-                { id: "DeptFunctionENO", editor: "popup", header: ['', '职能英文'], width:100}, //100
-                // { id: "officeAreaO", editor: "text", header: ['', messService.getMess("com.hytera.org.OfficeArea")] },
-                { id: "departNameCnU", editor: "popup", header: [{ text: "调整后", colspan: 5, css: { "text-align": "center" } }, '中文名'],width:100 }, //100
-                { id: "departNameEnU", editor: "text", header: ['', '英文名'],width:100 }, //100
-                { id: "principalU", editor: "text", header: ['', '负责人'] },
-                { id: "DeptFunctionCNU", editor: "popup", header: ['', '职能'], width:150 },
-                { id: "DeptFunctionENU", editor: "popup", header: ['', '职能英文'], width:100 }, //100
-                // { id: "officeAreaU", editor: "text", header: ['', messService.getMess("com.hytera.org.OfficeArea")] },
-        ];
-        // $$("mytable").define("columns", this.columns);
-        // $$("mytable").define("data", this.talbleData);
-        // $$('mytable').refresh();
-        console.warn("webix 代码已经被注释");
+    handleChange() {
+      console.log(1);
     }
+  },
+  created() {
+    this.getSelect();
+    console.log(region);
   }
 };
 </script>
+
+<style>
+
+</style>
