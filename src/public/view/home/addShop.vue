@@ -37,22 +37,22 @@
           </el-option>
         </el-select> -->
       </el-form-item>
-      <el-form-item label="地址" v-once>
+      <el-form-item label="地址">
         <el-cascader
           v-model="value4"
-          :options="region"
+          :props="props"
           @change="handleChange"></el-cascader>
       </el-form-item>
-      <el-form-item label="地址1" v-once>
+      <el-form-item label="地址1">
         <el-cascader
           v-model="value5"
-          :options="region"
+          :props="props1"
           @change="handleChange"></el-cascader>
       </el-form-item>
-      <el-form-item label="地址3" v-once>
+      <el-form-item label="地址3">
         <el-cascader
           v-model="value1"
-          :options="region"
+          :props="props2"
           @change="handleChange"></el-cascader>
       </el-form-item>
     </el-form>
@@ -62,6 +62,7 @@
 <script>
 import axios from "axios";
 import region from '../../../assets/region.json';
+let id = 0;
 export default {
   name: 'el-select-test',
   data() {
@@ -84,6 +85,126 @@ export default {
       value3: '',
       value4: '',
       value5: '',
+      props: {
+        lazy: true,
+        lazyLoad (node, resolve) {
+          const { level, root } = node;
+          const regionT = Array.from(region.data);
+          setTimeout(() => {
+            let region = [];
+            if (root) {
+              for(let i = 0; i < regionT.length; i++) {
+                let obj = {
+                  value: regionT[i].value,
+                  label: regionT[i].label,
+                  leaf: regionT[i].children === null
+                }
+                region.push(obj);
+              }
+              resolve(region);
+              return;
+            }
+            const getChildren = arr => {
+              arr.forEach(v => {
+                  // v.isCheck && result.push(v.id);
+                  if (v.parentCode === node.value) {
+                    let obj = {
+                      value: v.value,
+                      label: v.label,
+                      leaf: v.children === null
+                    }
+                    region.push(obj)
+                  }
+                  if (v.children instanceof Array) {
+                    getChildren(v.children)
+                  }
+              });
+            };
+            getChildren(regionT);
+            resolve(region);
+          }, 300);
+        }
+      },
+      props1: {
+        lazy: true,
+        lazyLoad (node, resolve) {
+          const { level, root } = node;
+          const regionT = Array.from(region.data);
+          setTimeout(() => {
+            let region = [];
+            if (root) {
+              for(let i = 0; i < regionT.length; i++) {
+                let obj = {
+                  value: regionT[i].value,
+                  label: regionT[i].label,
+                  leaf: regionT[i].children === null
+                }
+                region.push(obj);
+              }
+              resolve(region);
+              return;
+            }
+            const getChildren = arr => {
+              arr.forEach(v => {
+                  // v.isCheck && result.push(v.id);
+                  if (v.parentCode === node.value) {
+                    let obj = {
+                      value: v.value,
+                      label: v.label,
+                      leaf: v.children === null
+                    }
+                    region.push(obj)
+                  }
+                  if (v.children instanceof Array) {
+                    getChildren(v.children)
+                  }
+              });
+            };
+            getChildren(regionT);
+            resolve(region);
+          }, 300);
+        }
+      },
+      props2: {
+        lazy: true,
+        lazyLoad (node, resolve) {
+          const { level, root } = node;
+          const regionT = Array.from(region.data);
+          setTimeout(() => {
+            let region = [];
+            if (root) {
+              for(let i = 0; i < regionT.length; i++) {
+                let obj = {
+                  value: regionT[i].value,
+                  label: regionT[i].label,
+                  leaf: regionT[i].children === null
+                }
+                region.push(obj);
+              }
+              resolve(region);
+              return;
+            }
+            const getChildren = arr => {
+              arr.forEach(v => {
+                  // v.isCheck && result.push(v.id);
+                  if (v.parentCode === node.value) {
+                    let obj = {
+                      value: v.value,
+                      label: v.label,
+                      leaf: v.children === null
+                    }
+                    region.push(obj)
+                  }
+                  if (v.children instanceof Array) {
+                    getChildren(v.children)
+                  }
+              });
+            };
+            getChildren(regionT);
+            resolve(region);
+          }, 300);
+        }
+      }
     };
   },
   methods: {
@@ -102,7 +223,7 @@ export default {
     }
   },
   created() {
-    this.getSelect();
+    // this.getSelect();
     console.log(region);
   }
 };
