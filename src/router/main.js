@@ -7,9 +7,9 @@ const routers = [
         name: 'main',
         component (resolve) {
             require.ensure(
-                ['../public/view/Main.vue'],
+                ['../public/view/main.vue'],
                 () => {
-                    resolve(require('../public/view/Main.vue'))
+                    resolve(require('../public/view/main.vue'))
                 }
             )
         },
