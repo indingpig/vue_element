@@ -9,12 +9,12 @@
         <div>{{loaginMessage}}</div>
       </div>
       <div>
-        <el-form :model="loginForm" :rules="loginRules" ref="loginFormRules">
+        <el-form :model="loginForm"  ref="loginFormRules">
           <el-form-item prop="userName">
             <el-input placeholder="请输入用户名或者邮箱" v-model="loginForm.userName" clearable></el-input>
           </el-form-item>
           <!-- <div class="userName">
-                        
+
           </div>-->
           <el-form-item prop="password">
             <el-input placeholder="请输入密码" v-model="loginForm.password" clearable type="password"></el-input>
@@ -240,6 +240,8 @@ export default {
     // 提交表单
     submitForm(formName) {
       let self = this;
+      this.$router.push({ path: "/main/home" });
+      return;
       this.$refs[formName].validate(function(valid) {
         if (valid) {
           // 校验通过提交表单;
@@ -264,6 +266,7 @@ export default {
     // 注册表单提交
     siginUp(formName) {
       let self = this;
+      return;
       this.$refs[formName].validate(vaild => {
         if (vaild) {
           // 校验通过
