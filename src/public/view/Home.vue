@@ -10,7 +10,7 @@
 
 <script>
 import header from "../../components/header";
-import aside from "../../components/Aside.vue";
+import aside from "../../components/aside.vue";
 export default {
   data() {
     return {
