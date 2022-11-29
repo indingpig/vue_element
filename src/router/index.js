@@ -15,7 +15,7 @@ const routes = [
     ...main,
     {
         path: '*',
-        redirect: '/main/home',
+        redirect: '/login',
     },
 ];
 
